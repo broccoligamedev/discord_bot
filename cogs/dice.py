@@ -209,11 +209,14 @@ class DiceCog:
     # The result is sent as a message in response to the command.
     @commands.command()
     async def roll(self, context, *args):
-        roll_string = "".join(args)
-        lexer = Lexer(roll_string)
-        interpreter = Interpreter(lexer)
-        result = interpreter.parse()
-        await context.send(":game_die: Rolling: {}\nResult: {}".format(lexer.fancy_string, result))
+        try:
+            roll_string = "".join(args)
+            lexer = Lexer(roll_string)
+            interpreter = Interpreter(lexer)
+            result = interpreter.parse()
+            await context.send(":game_die: Rolling: {}\nResult: {}".format(lexer.fancy_string, result))
+        except:
+            await context.send("I don't understand.")
 
     # This is just a test command to see if the cog is working.
     @commands.command()
